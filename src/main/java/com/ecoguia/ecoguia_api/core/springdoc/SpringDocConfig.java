@@ -3,13 +3,16 @@ package com.ecoguia.ecoguia_api.core.springdoc;
 import com.ecoguia.ecoguia_api.api.exceptionhandler.Problem;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.OAuthFlow;
+import io.swagger.v3.oas.annotations.security.OAuthFlows;
+import io.swagger.v3.oas.annotations.security.OAuthScope;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.models.Components;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.media.Schema;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
 import io.swagger.v3.oas.models.tags.Tag;
@@ -25,8 +28,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Configuration
 @SecurityScheme(name = "security_auth",
-        type = SecuritySchemeType.HTTP,
-        scheme = "basic")
+        type = SecuritySchemeType.OAUTH2,
+        flows = @OAuthFlows(authorizationCode = @OAuthFlow(
+                authorizationUrl = "${springdoc.oAuthFlow.authorizationUrl}",
+                tokenUrl = "${springdoc.oAuthFlow.tokenUrl}",
+                scopes = {
+                        @OAuthScope(name = "READ", description = "read scope"),
+                        @OAuthScope(name = "WRITE", description = "write scope")
+                }
+        )))
 public class SpringDocConfig {
 
     private static final String badRequestResponse = "BadRequestResponse";
@@ -43,8 +53,12 @@ public class SpringDocConfig {
                         .description("REST API do EcoGuia")
                 )
                 .tags(Arrays.asList(
+                        new Tag().name("Cidades").description("Gerencia as cidades"),
+                        new Tag().name("Grupos").description("Gerencia os grupos"),
+                        new Tag().name("Ecopontos").description("Gerencia os ecopontos"),
                         new Tag().name("Estados").description("Gerencia os estados"),
-                        new Tag().name("Usuários").description("Gerencia os usuários")
+                        new Tag().name("Usuários").description("Gerencia os usuários"),
+                        new Tag().name("Permissões").description("Gerencia as permissões")
                 ))
                 .components(new Components()
                         .schemas(geraSchema())

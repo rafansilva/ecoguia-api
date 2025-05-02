@@ -25,4 +25,10 @@ public class Endereco {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_cidade_id")
     private Cidade cidade;
+
+    @Column(name = "endereco_latitude")
+    private String latitude;
+
+    @Column(name = "endereco_longitude")
+    private String longitude;
 }

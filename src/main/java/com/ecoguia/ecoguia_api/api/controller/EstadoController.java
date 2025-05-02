@@ -5,6 +5,7 @@ import com.ecoguia.ecoguia_api.api.assembler.EstadoModelAssembler;
 import com.ecoguia.ecoguia_api.api.model.EstadoModel;
 import com.ecoguia.ecoguia_api.api.model.input.EstadoInput;
 import com.ecoguia.ecoguia_api.api.openapi.controller.EstadoControllerOpenApi;
+import com.ecoguia.ecoguia_api.core.security.CheckSecurity;
 import com.ecoguia.ecoguia_api.domain.model.Estado;
 import com.ecoguia.ecoguia_api.domain.repository.EstadoRepository;
 import com.ecoguia.ecoguia_api.domain.service.CadastroEstadoService;
@@ -13,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +37,7 @@ public class EstadoController implements EstadoControllerOpenApi {
     @Autowired
     private EstadoInputDisassembler estadoInputDisassembler;
 
+    @PreAuthorize("isAuthenticated()")
     @Override
     @GetMapping
     public List<EstadoModel> listar() {
@@ -41,6 +46,7 @@ public class EstadoController implements EstadoControllerOpenApi {
         return estadoModelAssembler.toCollectionModel(todosEstados);
     }
 
+    @CheckSecurity.Estados.PodeConsultar
     @Override
     @GetMapping("/{estadoId}")
     public EstadoModel buscar(@PathVariable Long estadoId) {
@@ -49,6 +55,7 @@ public class EstadoController implements EstadoControllerOpenApi {
         return estadoModelAssembler.toModel(estado);
     }
 
+    @CheckSecurity.Estados.PodeEditar
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -60,6 +67,7 @@ public class EstadoController implements EstadoControllerOpenApi {
         return estadoModelAssembler.toModel(estado);
     }
 
+    @CheckSecurity.Estados.PodeEditar
     @Override
     @PutMapping("/{estadoId}")
     public EstadoModel atualizar(@PathVariable Long estadoId,
@@ -73,6 +81,7 @@ public class EstadoController implements EstadoControllerOpenApi {
         return estadoModelAssembler.toModel(estadoAtual);
     }
 
+    @CheckSecurity.Estados.PodeEditar
     @Override
     @DeleteMapping("/{estadoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -80,5 +89,4 @@ public class EstadoController implements EstadoControllerOpenApi {
         cadastroEstado.excluir(estadoId);
         return ResponseEntity.noContent().build();
     }
-
 }
