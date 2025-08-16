@@ -25,9 +25,9 @@ spring:
     origin: "*"
 
   datasource:
-    url: jdbc:mysql://root:mgDMtnrcdBTMPpvVpgXWwQXuGvcUvOvm@trolley.proxy.rlwy.net:38466/railway
-    username: root
-    password: mgDMtnrcdBTMPpvVpgXWwQXuGvcUvOvm
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   ##datasource:
   #  url: jdbc:mysql://${DB_HOST:localhost:3306}/ecoguia?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&&serverTimezone=UTC
