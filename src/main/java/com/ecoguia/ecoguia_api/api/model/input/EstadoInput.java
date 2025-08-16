@@ -12,7 +12,6 @@ public class EstadoInput {
 
     @Schema(example = "Minas Gerais")
     @NotBlank
-    @JsonProperty("nome")
     private String nome;
 
 }

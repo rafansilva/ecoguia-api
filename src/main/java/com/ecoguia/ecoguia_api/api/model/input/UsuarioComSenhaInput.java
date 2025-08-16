@@ -12,6 +12,5 @@ public class UsuarioComSenhaInput extends UsuarioInput{
 
     @Schema(example = "123", type = "string")
     @NotBlank
-    @JsonProperty("senha")
     private String senha;
 }

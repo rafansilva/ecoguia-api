@@ -38,6 +38,24 @@ public @interface CheckSecurity {
 
     }
 
+    public @interface Ecopontos {
+
+        @PreAuthorize("@ecoSecurity.podeGerenciarCadastroEcopontos()")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        public @interface PodeGerenciarCadastro { }
+
+        @PreAuthorize("@ecoSecurity.podeGerenciarFuncionamentoEcopontos(#ecopontoId)")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        public @interface PodeGerenciarFuncionamento { }
+
+        @PreAuthorize("@ecoSecurity.podeConsultarEcopontos()")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        public @interface PodeConsultar { }
+    }
+
     public @interface UsuariosGruposPermissoes {
 
         @PreAuthorize("hasAuthority('SCOPE_WRITE') and "

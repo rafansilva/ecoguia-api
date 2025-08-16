@@ -19,9 +19,12 @@ Antes de iniciar o projeto, instale os seguintes softwares:
 
 - **DBeaver Community (opcional, para visualizar o banco de dados)**  
   [Download DBeaver](https://dbeaver.io/download/)
-
 ---
-
+## 🐳 Docker:
+```bash
+mvn clean && mvn package && docker-compose up --build
+```
+---
 ## 🚀 Como iniciar o projeto
 
 ### 1. Clone o repositório

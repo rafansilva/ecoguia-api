@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.util.HashSet;
@@ -31,13 +32,11 @@ public class Ecoponto {
 
     private Boolean aberto = Boolean.FALSE;
 
-    @CreationTimestamp
     @Column(nullable = false, columnDefinition = "time")
-    private OffsetTime horarioAbertura;
+    private LocalTime horarioAbertura;
 
-    @CreationTimestamp
     @Column(nullable = false, columnDefinition = "time")
-    private OffsetTime horarioFechamento;
+    private LocalTime horarioFechamento;
 
     @ManyToMany
     @JoinTable(name = "ecoponto_usuario_responsavel",

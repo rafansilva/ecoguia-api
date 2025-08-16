@@ -1,0 +1,30 @@
+version: "3.9"
+
+networks:
+  ecoguia-network:
+    driver: bridge
+
+services:
+  ecoguia-mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "13306:3306"
+    networks:
+      - ecoguia-network
+
+  ecoguia-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["/wait-for-it.sh", "ecoguia-mysql:3306", "-t", "30", "--", "java", "-jar", "api.jar"]
+    environment:
+      DB_HOST: ecoguia-mysql
+      SPRING_PROFILES_ACTIVE: default
+    ports:
+      - 8080:8080
+    networks:
+      - ecoguia-network
+    depends_on:
+      - ecoguia-mysql

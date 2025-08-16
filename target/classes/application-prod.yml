@@ -1,0 +1,62 @@
+ecoguia:
+  jwt:
+    keystore:
+      jks-location: base64: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
+      password: 123456
+      keypair-alias: ecoguia
+  auth:
+    provider-url: http://localhost:8080
+
+spring:
+  profiles:
+    active: default
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/oauth2/jwks
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
+
+  cors:
+    origin: "*"
+
+  datasource:
+    url: mysql://root:mgDMtnrcdBTMPpvVpgXWwQXuGvcUvOvm@trolley.proxy.rlwy.net:38466/railway
+    username: root
+    password: mgDMtnrcdBTMPpvVpgXWwQXuGvcUvOvm
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration,classpath:db/testdata
+
+springdoc:
+  packages-to-scan: com.ecoguia.ecoguia_api
+  oAuthFlow:
+    authorizationUrl: http://127.0.0.1:8080/oauth2/authorize
+    tokenUrl: http://127.0.0.1:8080/oauth2/token
+  swagger-ui:
+    oauth2-redirect-url: http://127.0.0.1:8080/swagger-ui/oauth2-redirect.html
+    oauth:
+      client-id: ecoguia-web
+      client-secret: web123
+      use-pkce-with-authorization-code-grant: true
+      use-basic-authentication-with-access-code-grant: true

@@ -13,7 +13,7 @@ public class EstadoModel {
     @JsonProperty("id")
     private Long id;
 
-    @Schema(example = "Minas Gerais")
+    @Schema(example = "São Paulo")
     @JsonProperty("nome")
     private String nome;
 

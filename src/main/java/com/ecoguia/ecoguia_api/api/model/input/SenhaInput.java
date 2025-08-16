@@ -12,10 +12,8 @@ public class SenhaInput {
 
     @Schema(example = "123", type = "string")
     @NotBlank
-    @JsonProperty("senhaAtual")
     private String senhaAtual;
 
     @Schema(example = "123", type = "string")
-    @JsonProperty("novaSenha")
     private String novaSenha;
 }

@@ -23,8 +23,13 @@ public class EnderecoModel {
     @Schema(example = "Centro")
     private String bairro;
 
-    private CidadeResumoModel cidade;
+    @Schema(example = "-23.5489")
+    private String latitude;
 
+    @Schema(example = "-46.6388")
+    private String longitude;
+
+    private CidadeResumoModel cidade;
 
 }
 

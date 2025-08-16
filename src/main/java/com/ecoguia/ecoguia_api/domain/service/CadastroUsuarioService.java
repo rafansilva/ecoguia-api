@@ -2,12 +2,13 @@ package com.ecoguia.ecoguia_api.domain.service;
 
 import com.ecoguia.ecoguia_api.domain.exception.NegocioException;
 import com.ecoguia.ecoguia_api.domain.exception.UsuarioNaoEncontradoException;
+import com.ecoguia.ecoguia_api.domain.model.Grupo;
 import com.ecoguia.ecoguia_api.domain.model.Usuario;
 import com.ecoguia.ecoguia_api.domain.repository.UsuarioRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,9 @@ public class CadastroUsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CadastroGrupoService cadastroGrupo;
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
@@ -47,6 +51,22 @@ public class CadastroUsuarioService {
         }
 
         usuario.setSenha(passwordEncoder.encode(novaSenha));
+    }
+
+    @Transactional
+    public void desassociarGrupo(Long usuarioId, Long grupoId) {
+        Usuario usuario = buscarOuFalhar(usuarioId);
+        Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
+
+        usuario.removerGrupo(grupo);
+    }
+
+    @Transactional
+    public void associarGrupo(Long usuarioId, Long grupoId) {
+        Usuario usuario = buscarOuFalhar(usuarioId);
+        Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
+
+        usuario.adicionarGrupo(grupo);
     }
 
     public Usuario buscarOuFalhar(Long usuarioId) {

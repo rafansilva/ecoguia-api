@@ -37,7 +37,7 @@ public class EstadoController implements EstadoControllerOpenApi {
     @Autowired
     private EstadoInputDisassembler estadoInputDisassembler;
 
-    @PreAuthorize("isAuthenticated()")
+    @CheckSecurity.Estados.PodeConsultar
     @Override
     @GetMapping
     public List<EstadoModel> listar() {

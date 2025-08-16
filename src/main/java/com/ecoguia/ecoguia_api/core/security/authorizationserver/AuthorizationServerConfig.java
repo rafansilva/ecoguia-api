@@ -58,8 +58,9 @@ public class AuthorizationServerConfig {
                     authorize.anyRequest().authenticated();
                 })
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+                .cors(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
-                .apply(authorizationServerConfigurer);
+                .with(authorizationServerConfigurer, Customizer.withDefaults());
 
         return http.formLogin(customizer -> customizer.loginPage("/login")).build();
     }
@@ -101,8 +102,10 @@ public class AuthorizationServerConfig {
                         .accessTokenTimeToLive(Duration.ofMinutes(30))
                         .build())
                 .redirectUri("http://127.0.0.1:8080/authorized")
+                .redirectUri("http://127.0.0.1:8080/swagger-ui/oauth2-redirect.html")
                 .clientSettings(ClientSettings.builder()
                         .requireAuthorizationConsent(false)
+                        .requireProofKey(true)
                         .build())
                 .build();
 

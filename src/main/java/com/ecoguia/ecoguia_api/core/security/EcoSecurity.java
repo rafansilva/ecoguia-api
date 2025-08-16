@@ -1,5 +1,7 @@
 package com.ecoguia.ecoguia_api.core.security;
 
+import com.ecoguia.ecoguia_api.domain.repository.EcopontoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -7,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EcoSecurity {
+
+    @Autowired
+    private EcopontoRepository ecopontoRepository;
 
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
@@ -25,6 +30,14 @@ public class EcoSecurity {
             return null;
         }
         return Long.valueOf(usuarioId.toString());
+    }
+
+    public boolean gerenciaEcoponto(Long ecopontoId) {
+        if (ecopontoId == null) {
+            return false;
+        }
+
+        return ecopontoRepository.existsResponsavel(ecopontoId, getUsuarioId());
     }
 
     public boolean usuarioAutenticadoIgual(Long usuarioId) {
@@ -61,4 +74,18 @@ public class EcoSecurity {
         return isAutenticado() && temEscopoLeitura();
     }
 
+
+    public boolean podeConsultarEcopontos() {
+        return temEscopoLeitura() && isAutenticado();
+    }
+
+    public boolean podeGerenciarCadastroEcopontos() {
+        return temEscopoEscrita() && hasAuthority("EDITAR_ECOPONTOS");
+    }
+
+    public boolean podeGerenciarFuncionamentoEcopontos(Long ecopontoId) {
+        return temEscopoEscrita() && (hasAuthority("EDITAR_ECOPONTOS")
+                || gerenciaEcoponto(ecopontoId)
+                );
+    }
 }

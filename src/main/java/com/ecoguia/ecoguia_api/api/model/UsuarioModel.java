@@ -10,16 +10,12 @@ import lombok.Setter;
 public class UsuarioModel {
 
     @Schema(example = "1")
-    @JsonProperty("id")
     private Long id;
 
     @Schema(example = "João da Silva")
-    @JsonProperty("nome")
     private String nome;
 
     @Schema(example = "joao.ger@ecoguia.com.br")
-    @JsonProperty("email")
     private String email;
 
-    private EnderecoModel enderecoModel;
 }

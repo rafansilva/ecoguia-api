@@ -13,12 +13,10 @@ public class UsuarioInput {
 
     @Schema(example = "João da Silva")
     @NotBlank
-    @JsonProperty("nome")
     private String nome;
 
     @Schema(example = "joao.ger@ecoguia.com.br")
     @NotBlank
     @Email
-    @JsonProperty("email")
     private String email;
 }
